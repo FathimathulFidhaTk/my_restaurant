@@ -1,30 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Customer/breakfastt/cereals/view_more.dart';
 import 'package:my_restaurant/Customer/breakfastt/croissants/view_more.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Initialize a new Firebase App instance
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // Remove the debug banner
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
-      home:  ViewCustCroissant(),
-    );
-  }
-}
 
 class ViewCustCroissant extends StatefulWidget {
   @override
@@ -32,13 +9,13 @@ class ViewCustCroissant extends StatefulWidget {
 }
 
 class _ViewCustCroissantState extends State<ViewCustCroissant> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('croissants').snapshots(),
+          stream:
+              FirebaseFirestore.instance.collection('croissants').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(
@@ -53,8 +30,7 @@ class _ViewCustCroissantState extends State<ViewCustCroissant> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 1,
                     crossAxisSpacing: 1,
-                    childAspectRatio: 0.49
-                ),
+                    childAspectRatio: 0.49),
                 itemCount: foodDocs.length,
                 itemBuilder: (context, index) {
                   final food = foodDocs[index].data();
@@ -66,20 +42,17 @@ class _ViewCustCroissantState extends State<ViewCustCroissant> {
                           MaterialPageRoute(
                               builder: (context) => CroissantPage(
                                   food['food name'] ?? 'No Food Name',
-                                  food['food description'] ?? 'No Food description',
+                                  food['food description'] ??
+                                      'No Food description',
                                   foodDocumentId,
                                   food['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE',
-                                  food['food price']
-                              )
-                          ),
+                                  food['food price'])),
                         );
                       },
                       child: FoodCard(food: food as Map<String, dynamic>));
                 },
               ),
             );
-
-
           },
         ),
       ),
@@ -104,24 +77,28 @@ class FoodCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.network(
-                imageUrl),
+            child: Image.network(imageUrl),
           ),
           ListTile(
-            title: Text( '${food?['food name'] ?? 'No Food Name'}',style: GoogleFonts.alegreya(
-                textStyle: Theme.of(context).textTheme.headline4,
-                fontSize: 20,
-                color: Colors.brown)),
+            title: Text('${food?['food name'] ?? 'No Food Name'}',
+                style: GoogleFonts.alegreya(
+                    textStyle: Theme.of(context).textTheme.headline4,
+                    fontSize: 20,
+                    color: Colors.brown)),
             subtitle: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
-                  child: Text('\$',style: TextStyle(fontSize: 16,color: Colors.brown),),
+                  child: Text(
+                    '\$',
+                    style: TextStyle(fontSize: 16, color: Colors.brown),
+                  ),
                 ),
-                Text( '${food?['food price'] ?? 'No Food Price'}',style: GoogleFonts.alegreya(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 22,
-                    color: Colors.brown)),
+                Text('${food?['food price'] ?? 'No Food Price'}',
+                    style: GoogleFonts.alegreya(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 22,
+                        color: Colors.brown)),
               ],
             ),
           ),

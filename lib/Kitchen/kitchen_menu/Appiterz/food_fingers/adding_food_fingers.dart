@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +9,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_restaurant/Kitchen/kitchen_menu/Appiterz/food_fingers/view_food_fingers.dart';
-import 'package:path/path.dart' as path;
-
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,8 +39,6 @@ class AddFoodFingers extends StatefulWidget {
 }
 
 class _AddFoodFingersState extends State<AddFoodFingers> {
-
-  final CollectionReference _foodCollection = FirebaseFirestore.instance.collection('food fingers'); // Replace with your collection name
 
   final TextEditingController _foodIdController = TextEditingController();
   final TextEditingController _foodNameController = TextEditingController();
@@ -280,7 +273,6 @@ class _AddFoodFingersState extends State<AddFoodFingers> {
 
         await firestore.collection('food fingers').add(fooditemm);
 
-        // Optionally, you can clear the text fields or navigate to another page
         _foodIdController.clear();
         _foodNameController.clear();
         _foodPriceController.clear();

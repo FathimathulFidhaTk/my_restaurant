@@ -1,13 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_restaurant/Customer/HomeScreen.dart';
 import 'package:my_restaurant/Customer/feedback.dart';
 import 'package:my_restaurant/Intro_Pages/screenpage.dart';
-import 'package:path/path.dart';
+import 'customer_foodorder/my_orders.dart';
 
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+}
 
-void main() => runApp(const BottomNavigationBarExampleApp());
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home:  BottomNavigationBarExampleApp(),
+    );
+  }
+}
 class BottomNavigationBarExampleApp extends StatelessWidget {
   const BottomNavigationBarExampleApp({super.key});
 
@@ -34,9 +50,9 @@ class _BottomNavigationBarExampleState
 
   static  List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Home(),
+    OrderList(),
     FeedbackMessage(),
-    ScreenPage()
+    
   ];
 
   void _onItemTapped(int index) {
@@ -44,6 +60,11 @@ class _BottomNavigationBarExampleState
       _selectedIndex = index;
     });
   }
+  void signOut() {
+    // FirebaseAuth.instance.signOut();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenPage()));
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +89,9 @@ class _BottomNavigationBarExampleState
                 label: "Home"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.search_rounded,
+                  Icons.food_bank_outlined,
                 ),
-                label: "Search"),
+                label: "My Orders"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.feedback_outlined,
@@ -78,8 +99,13 @@ class _BottomNavigationBarExampleState
                 label: "Feedback"
             ),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.login_outlined,
+                icon: GestureDetector(
+                  onTap: () {
+                    signOut();
+                  },
+                  child: Icon(
+                    Icons.login_outlined,
+                  ),
                 ),
                 label: 'Logout'),
 

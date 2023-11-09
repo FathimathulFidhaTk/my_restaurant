@@ -1,16 +1,35 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../kitchen_drawer.dart';
+import 'BreakFast/Croissants/add_croissants.dart';
+import 'BreakFast/Eggs/add_eggs.dart';
+import 'BreakFast/Tost/add_toast.dart';
 import 'BreakFast/cerals/add_cerals.dart';
+import 'BreakFast/pancakes/add_pancakes.dart';
+import 'BreakFast/waffles/add_waffles.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: BreakFast(),
-    debugShowCheckedModeBanner: false,
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize a new Firebase App instance
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // Remove the debug banner
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home:  BreakFast(),
+    );
+  }
+}
+
 
 class BreakFast extends StatefulWidget{
   @override
@@ -20,14 +39,14 @@ class BreakFast extends StatefulWidget{
 class _BreakFastState extends State<BreakFast> {
   @override
 
-  var breakfastType = ["assets/kitchen/menu/breakfast/cerals.jpeg","assets/kitchen/menu/breakfast/toast.jpeg",
+  var breakfast = ["assets/kitchen/menu/breakfast/cerals.jpeg","assets/kitchen/menu/breakfast/toast.jpeg",
     "assets/kitchen/menu/breakfast/Eggs.jpeg","assets/kitchen/menu/breakfast/pancake.jpeg","assets/kitchen/menu/breakfast/waffles.jpeg",
     "assets/kitchen/menu/breakfast/Crossiant.jpeg"];
 
   var text2 =["\n\n\nC\nE\nR\nA\nL\nS","\n\n\n\nT\nO\nS\nT","\n\n\n\nE\nG\nG\nS","\nP\nA\nN\nC\nA\nK\nE\nS",
     '\n\nW\nA\nF\nF\nL\nE\nS','\n\nC\nR\nO\nI\nS\nS\nA\nN\nT\nS'];
 
-  var link =[AddCerals(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
+  var link =[AddCerals(),AddToast(),AddEggs(),AddPancakes(), AddWaffles(),AddCroissants()];
   Widget build(BuildContext context) {
     return SafeArea(
       child: SafeArea(
@@ -66,7 +85,7 @@ class _BreakFastState extends State<BreakFast> {
                               mainAxisSpacing: 6,
                               childAspectRatio: 0.565
                           ),
-                          itemCount: breakfastType.length,
+                          itemCount: breakfast.length,
                           itemBuilder: (context, index) {
                             return Card(
                               shape:
@@ -96,7 +115,7 @@ class _BreakFastState extends State<BreakFast> {
                                               ],
                                               image: DecorationImage(
                                                   image: AssetImage(
-                                                    breakfastType[index],
+                                                    breakfast[index],
                                                   ),
                                                   fit: BoxFit.cover)),
                                           child: GestureDetector(

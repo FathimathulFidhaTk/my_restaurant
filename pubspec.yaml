@@ -93,6 +93,8 @@ flutter:
     - assets/kitchen/menu/appetizers/
     - assets/kitchen/menu/breakfast/
     - assets/kitchen/menu/deserts/
+    - assets/kitchen/menu/beverages/
+    - assets/kitchen/menu/nonvegg/
     - assets/cust_home/
     - assets/icon/
 

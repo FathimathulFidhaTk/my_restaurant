@@ -39,6 +39,14 @@ class _RegisterState extends State<Register> {
   var cpass = TextEditingController();
   bool hidepass = true;
 
+  bool isToggled = false;
+
+  void _toggleButton() {
+    setState(() {
+      isToggled = !isToggled;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -224,11 +232,13 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         width: 55,
                       ),
-                      Icon(
-                        Icons.toggle_on_rounded,
-                        size: 35,
-                        color: Colors.brown,
-                      )
+                      IconButton(
+                        icon: Icon(
+                          isToggled ? Icons.toggle_on_rounded : Icons.toggle_off_outlined,
+                          color: Colors.brown,
+                        ),
+                        onPressed: _toggleButton,
+                      ),
                     ],
                   ),
                 ),

@@ -1,6 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Cakes/add_cakes.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Ice%20cream/add_icecream.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Pie/add_pie.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/brownies/add_brownies.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/chocolates/add_chocolates.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cookies/add_cookies.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cupcakes/add_cupcakes.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/puddings/add_puddings.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,7 +32,7 @@ class _DessertsState extends State<Desserts> {
   var text3 =["\n\n\n\nC\nA\nK\nE\nS","\n\n\n\n\nP\nI\nE","\nI\nC\nE\nC\nR\nE\nA\nM","\nC\nO\nO\nK\nI\nE\nS",
     '\nB\nR\nO\nW\nN\nI\nE\nS','\nC\nU\nP\nC\nA\nK\nE\nS','\nP\n\nU\nD\nD\nI\nN\nG','\nC\nH\nO\nC\nO\nL\nO\nA\nT\nE\nS'];
 
-  // var link =[Appetizers(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
+  var link =[AddCake(),AddPie(),AddIcecream(),AddCookies(),AddBrownies(),AddCupcake(), AddPuddings(),AddChocolate()];
   Widget build(BuildContext context) {
     return SafeArea(
       child: SafeArea(
@@ -98,12 +106,13 @@ class _DessertsState extends State<Desserts> {
                                                   fit: BoxFit.cover)),
                                           child: GestureDetector(
                                               onTap: (){
-                                                // setState(() {
-                                                //   Navigator.of(context).push(
-                                                //     MaterialPageRoute(
-                                                //       builder: (context) => link[index],
-                                                //     ),
-                                                //   );                                              });
+                                                setState(() {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) => link[index],
+                                                    ),
+                                                  );
+                                                });
                                               }
                                           ),
                                         )

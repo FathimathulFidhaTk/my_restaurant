@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Admin/Staff_Management.dart';
+import '../Admin/Staff_Mangement/Staff_Management.dart';
 import 'kitchen_home.dart';
 
 void main() async {

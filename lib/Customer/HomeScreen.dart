@@ -1,14 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:my_restaurant/Customer/breakfastt/breakfast.dart';
+import 'package:my_restaurant/Customer/desert/desserts.dart';
+import 'package:my_restaurant/Customer/pizza/view_food.dart';
+import 'package:my_restaurant/Customer/sandwich/view_food.dart';
 import '../Kitchen/kitchen_drawer.dart';
-import '../Kitchen/kitchen_menu/breakfast.dart';
-import '../Kitchen/kitchen_menu/desserts.dart';
-import 'cust_appetizers.dart';
+import 'Pasta/view_food.dart';
+import 'burger/view_food.dart';
+import 'appt/cust_appetizers.dart';
 
 
 void main() async {
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
     '\nP\nA\nR\nA\nT\nH\nA\nS'
   ];
 
-  var link =[CustAppetizers(),BreakFast(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),Desserts(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
+  var link =[CustAppetizers(),BreakFast(),ViewCustPasta(),ViewCustPizza(),ViewCustSandwich(),ViewCustBurger(),Desserts(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
 
   Widget build(BuildContext context) {
     return SafeArea(

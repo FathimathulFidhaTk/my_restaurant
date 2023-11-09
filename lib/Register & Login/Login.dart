@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Admin/Admin_Homepage.dart';
+import '../Admin/Home/Admin_Homepage.dart';
 import '../Customer/customer_home.dart';
-import '../Kitchen/kitchen_drawer.dart';
 import '../drawer/drawer_main.dart';
 import 'Register.dart';
 
@@ -57,6 +56,14 @@ class _LoginPageState extends State<LoginPage> {
             context) => liquidw()));
       });
     } }
+  bool isToggled = false;
+
+  void _toggleButton() {
+    setState(() {
+      isToggled = !isToggled;
+    });
+  }
+
 
 
   @override
@@ -178,11 +185,13 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: 55,
                         ),
-                        Icon(
-                          Icons.toggle_on_rounded,
-                          size: 35,
-                          color: Colors.brown,
-                        )
+                    IconButton(
+                      icon: Icon(
+                        isToggled ? Icons.toggle_on_rounded : Icons.toggle_off_outlined,
+                        color: Colors.brown,
+                      ),
+                      onPressed: _toggleButton,
+                    ),
                       ],
                     ),
                   ),

@@ -61,7 +61,7 @@ class FoodList extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 8,
-                childAspectRatio: 0.47
+                childAspectRatio: 0.46
             ),
             ),
           ),
@@ -83,7 +83,7 @@ class FoodItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = foodItem?['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
+    final imageUrl = foodItem['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -115,7 +115,7 @@ class FoodItemCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 6,left: 8),
                 child: Text(
-                  '${foodItem?['food name'] ?? 'No Food Name'}',
+                  '${foodItem['food name'] ?? 'No Food Name'}',
                   style: GoogleFonts.alegreya(
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 23, color: Colors.brown,),

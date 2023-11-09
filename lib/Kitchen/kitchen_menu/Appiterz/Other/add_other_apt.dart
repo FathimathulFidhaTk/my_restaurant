@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_restaurant/Kitchen/kitchen_menu/Appiterz/Other/view_other_appt.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Appiterz/dip/view_food_details.dart';
-import 'package:path/path.dart' as path;
 
 
 
@@ -45,9 +42,6 @@ class AddOtherFood extends StatefulWidget {
 }
 
 class _AddOtherFoodState extends State<AddOtherFood> {
-
-  final CollectionReference _foodCollection = FirebaseFirestore.instance.collection('others'); // Replace with your collection name
-
   final TextEditingController _foodIdController = TextEditingController();
   final TextEditingController _foodNameController = TextEditingController();
   final TextEditingController _foodPriceController = TextEditingController();

@@ -1,40 +1,12 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Appiterz/dip/view_food_details.dart';
 import 'package:my_restaurant/Kitchen/kitchen_menu/BreakFast/Tost/view_toast.dart';
-import 'package:path/path.dart' as path;
-
-
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
-      home:  AddToast(),
-    );
-  }
-}
-
 
 
 class AddToast extends StatefulWidget {
@@ -45,8 +17,6 @@ class AddToast extends StatefulWidget {
 }
 
 class _AddToastState extends State<AddToast> {
-
-  final CollectionReference _foodCollection = FirebaseFirestore.instance.collection('ttoast'); // Replace with your collection name
 
   final TextEditingController _foodIdController = TextEditingController();
   final TextEditingController _foodNameController = TextEditingController();

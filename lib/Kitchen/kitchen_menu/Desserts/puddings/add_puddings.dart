@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Appiterz/dip/view_food_details.dart';
-import 'package:path/path.dart' as path;
+import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/puddings/view_puddings.dart';
+
 
 
 
@@ -44,9 +43,6 @@ class AddPuddings extends StatefulWidget {
 }
 
 class _AddPuddingsState extends State<AddPuddings> {
-
-  final CollectionReference _foodCollection = FirebaseFirestore.instance.collection('pudding'); // Replace with your collection name
-
   final TextEditingController _foodIdController = TextEditingController();
   final TextEditingController _foodNameController = TextEditingController();
   final TextEditingController _foodPriceController = TextEditingController();
@@ -231,7 +227,7 @@ class _AddPuddingsState extends State<AddPuddings> {
                                           padding: const EdgeInsets.only(left: 50,right: 40,bottom: 20,top: 8),
                                           child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewFoodDetails()));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewPudding()));
                                               },
                                               child: Text(
                                                 "View Food Details",

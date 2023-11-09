@@ -2,17 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/foodfingers/add_fdfingers.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/others/add_otherapt.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/salads/add_salads.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/soup/add_soup.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/stuffedfoods/add_stuffedfoods.dart';
-
-import 'dip/adding_foods.dart';
+import 'Appiterz/Other/add_other_apt.dart';
+import 'Appiterz/dip/adding_food_dip.dart';
+import 'Appiterz/food_fingers/adding_food_fingers.dart';
+import 'Appiterz/salads/add_salads.dart';
+import 'Appiterz/soup/add_soup.dart';
+import 'Appiterz/stuffedfoods/add_stuffedfoods.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize a new Firebase App instance
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -56,7 +54,7 @@ class _AppetizersState extends State<Appetizers> {
     '\n\n\n\nO\nT\nH\nE\nR\nS'
   ];
 
-  var appt =[AddFood(),AddFdfingers(),AddSoup(),AddSalads(),AddStuffedFoood(),AddOthers()];
+  var appt =[AddFoodDip(),AddFoodFingers(),AddFoodSoups(),AddFoodSalads(),AddStuffedFood(),AddOtherFood()];
 
   Widget build(BuildContext context) {
     return SafeArea(

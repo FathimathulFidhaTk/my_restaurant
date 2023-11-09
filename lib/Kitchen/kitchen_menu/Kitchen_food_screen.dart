@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../kitchen_drawer.dart';
+import 'Beverages/Beverages.dart';
+import 'Burger/add_burgers.dart';
+import 'Pasta/add_pasta.dart';
+import 'Piza/add_pizza.dart';
+import 'Sandwich/add_sandwich.dart';
 import 'appetizers.dart';
 import 'breakfast.dart';
 import 'desserts.dart';
@@ -37,21 +42,22 @@ class KitchenMenu extends StatefulWidget {
 
 class _KitchenMenuState extends State<KitchenMenu> {
   var img = ["assets/kitchen/menu/appetizer.jpeg","assets/kitchen/menu/b2.jpeg",
-    "assets/kitchen/menu/pasta.jpeg","assets/kitchen/menu/pizzza.png","assets/kitchen/menu/sandwich.jpeg","assets/kitchen/menu/burger.jpeg",
+    "assets/kitchen/menu/pasta.jpeg","assets/kitchen/menu/pizzza.png","assets/kitchen/menu/sandwich.jpeg",
+    "assets/kitchen/menu/burger.jpeg",
     "assets/kitchen/menu/deserts.jpeg","assets/kitchen/menu/beverages.jpeg",
-    "assets/kitchen/menu/chikhen.jpeg","assets/kitchen/menu/seafood.jpeg",
-    "assets/kitchen/menu/veg.png","assets/kitchen/menu/noodles.jpeg", "assets/kitchen/menu/japaneese.jpeg",
+    "assets/kitchen/menu/chikhen.jpeg",
+    "assets/kitchen/menu/veg.png",
     "assets/kitchen/menu/Biryani.jpeg","assets/kitchen/menu/parathas.jpeg",
   ];
 
   var txt =['\nA\nP\nP\nE\nT\nI\nZ\nE\nR','\nB\nR\nE\nA\nK\nF\nA\nS\nT','\n\n\nP\nA\nS\nT\nA',
     '\n\n\nP\nI\nZ\nZ\nA','\nS\nA\nN\nD\nW\nI\nC\nH\nE','\n\nB\nU\nR\nG\nE\nR','\nD\nE\nS\nS\nE\nR\nT\nS',
-    '\nB\nE\nV\nE\nR\nA\nG\nE\nS','\n\nN\nO\nN\n-\nV\nE\nG','\n\nS\nE\nA\nF\nO\nO\nD',
-    '\n\n\n\nV\nE\nG','\n\nN\nO\nO\nD\nL\nE\nS','\nJ\nA\nP\nA\nN\nE\nS\nE','\n\nA\nR\nA\nB\nI\nA\nN',
+    '\nB\nE\nV\nE\nR\nA\nG\nE\nS','\n\nN\nO\nN\n-\nV\nE\nG',
+    '\n\n\n\nV\nE\nG','\n\nA\nR\nA\nB\nI\nA\nN',
     '\nP\nA\nR\nA\nT\nH\nA\nS'
   ];
 
-  var link =[Appetizers(),BreakFast(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),Desserts(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
+  var link =[Appetizers(),BreakFast(),AddPasta(),AddPizza(),AddSandwich(),AddBurgers(),Desserts(),Beverages(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
 
   Widget build(BuildContext context) {
     return SafeArea(

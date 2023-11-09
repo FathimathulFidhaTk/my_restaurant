@@ -47,22 +47,21 @@ class FoodList extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
-        final details = snapshot.data!.docs;
+        final foodItems = snapshot.data!.docs;
         return Padding(
           padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
           child: Container(
-            height: Get.height * 0.9,
+            height: Get.height * 5,
             child: GridView.builder(
-              itemCount: details.length,
+              itemCount: foodItems.length,
               itemBuilder: (context, index) {
-                final food = details[index].data();
-
-                return FoodItemCard(Fooditem: food as Map<String, dynamic>);
+                final foodItem = foodItems[index];
+                return FoodItemCard(Fooditem: foodItem);
               }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 8,
+                mainAxisSpacing: 12,
                 crossAxisSpacing: 8,
-                childAspectRatio: 0.5
+                childAspectRatio: 0.46
             ),
             ),
           ),
@@ -74,15 +73,17 @@ class FoodList extends StatelessWidget {
 }
 
 class FoodItemCard extends StatelessWidget {
-  final Map<String, dynamic>? Fooditem;
+  final QueryDocumentSnapshot Fooditem;
 
   FoodItemCard({required this.Fooditem});
 
-
+  Future<void> _deleteItem() async {
+    await Fooditem.reference.delete();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = Fooditem?['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
+    final imageUrl = Fooditem['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -114,7 +115,7 @@ class FoodItemCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 6,left: 8),
                 child: Text(
-                  '${Fooditem?['food name'] ?? 'No Food Name'}',
+                  '${Fooditem['food name'] ?? 'No Food Name'}',
                   style: GoogleFonts.alegreya(
                     textStyle: Theme.of(context).textTheme.headline4,
                     fontSize: 22, color: Colors.brown,),
@@ -134,7 +135,10 @@ class FoodItemCard extends StatelessWidget {
                         style: GoogleFonts.alegreya(
                           textStyle: Theme.of(context).textTheme.headline4,
                           fontSize: 24, color: Colors.brown,),),
-                    ),SizedBox(width: 52,),
+                    ),SizedBox(width: 48,),
+                    IconButton(
+                        onPressed: _deleteItem,
+                        icon: Icon(Icons.delete_forever,color: Colors.brown,))
                         ],
                 ),
               ),

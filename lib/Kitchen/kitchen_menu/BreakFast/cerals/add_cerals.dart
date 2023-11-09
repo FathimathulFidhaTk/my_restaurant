@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,26 +12,6 @@ import 'package:my_restaurant/Kitchen/kitchen_menu/BreakFast/cerals/view_cerals.
 import 'package:path/path.dart' as path;
 
 
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
-      home:  AddCerals(),
-    );
-  }
-}
 
 class AddCerals extends StatefulWidget {
   AddCerals({super.key});
@@ -330,7 +309,7 @@ class _AddCeralsState extends State<AddCerals> {
                                           padding: const EdgeInsets.only(left: 50,right: 40,bottom: 20,top: 10),
                                           child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => viewCerals()));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewCerals()));
                                               },
                                               child: Text(
                                                 "View Food Details",

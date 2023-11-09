@@ -2,11 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Customer/appt/foodfingers/view_order.dart';
-import 'package:my_restaurant/Customer/burger/view_order.dart';
 import 'package:my_restaurant/Customer/desert/brownies/view_order.dart';
-import 'package:path/path.dart' as path;
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -16,15 +12,14 @@ class BrowniPage extends StatefulWidget {
   final String foodDocumentId;
   final String imageUrl;
 
-
-  BrowniPage(this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl);
+  BrowniPage(
+      this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl);
 
   @override
   State<BrowniPage> createState() => _BrowniPageState();
 }
 
 class _BrowniPageState extends State<BrowniPage> {
-
   FirebaseStorage storage = FirebaseStorage.instance;
 
   int quantity = 1;
@@ -90,11 +85,10 @@ class _BrowniPageState extends State<BrowniPage> {
                             height: Get.height * 0.51,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                image: DecorationImage(image:
-                                NetworkImage(widget.imageUrl),
+                                image: DecorationImage(
+                                  image: NetworkImage(widget.imageUrl),
                                   fit: BoxFit.cover,
-                                )
-                            ),
+                                )),
                           ),
                           SizedBox(
                             height: 8,
@@ -106,7 +100,7 @@ class _BrowniPageState extends State<BrowniPage> {
                             child: Text(widget.foodName,
                                 style: GoogleFonts.alegreya(
                                     textStyle:
-                                    Theme.of(context).textTheme.headline4,
+                                        Theme.of(context).textTheme.headline4,
                                     fontSize: 26,
                                     color: Colors.brown)),
                           ),
@@ -115,7 +109,7 @@ class _BrowniPageState extends State<BrowniPage> {
                             child: Text(widget.foodDescription,
                                 style: GoogleFonts.alegreya(
                                     textStyle:
-                                    Theme.of(context).textTheme.headline4,
+                                        Theme.of(context).textTheme.headline4,
                                     fontSize: 18,
                                     color: Colors.brown)),
                           ),
@@ -125,8 +119,9 @@ class _BrowniPageState extends State<BrowniPage> {
                               children: <Widget>[
                                 Text('Quantity: $quantity',
                                     style: GoogleFonts.alegreya(
-                                        textStyle:
-                                        Theme.of(context).textTheme.headline4,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
                                         fontSize: 22,
                                         color: Colors.brown)),
                                 SizedBox(width: 20),
@@ -134,11 +129,12 @@ class _BrowniPageState extends State<BrowniPage> {
                                     onPressed: incrementQuantity,
                                     child: Icon(Icons.add),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.1, Get.height * 0.04),
+                                      minimumSize: Size(
+                                          Get.width * 0.1, Get.height * 0.04),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 10,
@@ -147,11 +143,12 @@ class _BrowniPageState extends State<BrowniPage> {
                                     onPressed: decrementQuantity,
                                     child: Icon(Icons.remove),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.1, Get.height * 0.04),
+                                      minimumSize: Size(
+                                          Get.width * 0.1, Get.height * 0.04),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     )),
                               ],
                             ),
@@ -165,23 +162,22 @@ class _BrowniPageState extends State<BrowniPage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              BrowniOrderPage(
-                                                  widget.foodName,
-                                                  widget.foodDescription,
-                                                  quantity,
-                                                  widget.imageUrl
-                                              ),
+                                          builder: (context) => BrowniOrderPage(
+                                              widget.foodName,
+                                              widget.foodDescription,
+                                              quantity,
+                                              widget.imageUrl),
                                         ),
                                       );
                                     },
                                     child: Text('Order now'),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.35, Get.height * 0.05),
+                                      minimumSize: Size(
+                                          Get.width * 0.35, Get.height * 0.05),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 35,
@@ -190,11 +186,12 @@ class _BrowniPageState extends State<BrowniPage> {
                                     onPressed: () {},
                                     child: Text('Cancel'),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.35, Get.height * 0.05),
+                                      minimumSize: Size(
+                                          Get.width * 0.35, Get.height * 0.05),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     )),
                               ],
                             ),
