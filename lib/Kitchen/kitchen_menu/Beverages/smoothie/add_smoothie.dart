@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Beverages/smoothie/view_smoothie.dart';
 
 class AddSmoothie extends StatefulWidget {
   AddSmoothie({super.key});
@@ -200,7 +201,7 @@ class _AddSmoothieState extends State<AddSmoothie> {
                                           padding: const EdgeInsets.only(left: 50,right: 40,bottom: 20,top: 8),
                                           child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ()));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewSmoothie()));
                                               },
                                               child: Text(
                                                 "View Food Details",

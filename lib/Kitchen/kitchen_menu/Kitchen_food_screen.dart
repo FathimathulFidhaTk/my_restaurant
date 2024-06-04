@@ -2,20 +2,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../kitchen_drawer.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/parathas/add_parathas.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/vegg/add_veg.dart';
 import 'Beverages/Beverages.dart';
 import 'Burger/add_burgers.dart';
+import 'Non - vegg/non_veg.dart';
 import 'Pasta/add_pasta.dart';
 import 'Piza/add_pizza.dart';
 import 'Sandwich/add_sandwich.dart';
 import 'appetizers.dart';
+import 'arabian/add_arabian.dart';
 import 'breakfast.dart';
 import 'desserts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize a new Firebase App instance
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -29,35 +30,61 @@ class MyApp extends StatelessWidget {
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
-      home:  KitchenMenu(),
+      home: KitchenMenu(),
     );
   }
 }
 
 class KitchenMenu extends StatefulWidget {
-
   @override
   State<KitchenMenu> createState() => _KitchenMenuState();
 }
 
 class _KitchenMenuState extends State<KitchenMenu> {
-  var img = ["assets/kitchen/menu/appetizer.jpeg","assets/kitchen/menu/b2.jpeg",
-    "assets/kitchen/menu/pasta.jpeg","assets/kitchen/menu/pizzza.png","assets/kitchen/menu/sandwich.jpeg",
+  var img = [
+    "assets/kitchen/menu/appetizer.jpeg",
+    "assets/kitchen/menu/b2.jpeg",
+    "assets/kitchen/menu/pasta.jpeg",
+    "assets/kitchen/menu/pizzza.png",
+    "assets/kitchen/menu/sandwich.jpeg",
     "assets/kitchen/menu/burger.jpeg",
-    "assets/kitchen/menu/deserts.jpeg","assets/kitchen/menu/beverages.jpeg",
+    "assets/kitchen/menu/deserts.jpeg",
+    "assets/kitchen/menu/beverages.jpeg",
     "assets/kitchen/menu/chikhen.jpeg",
     "assets/kitchen/menu/veg.png",
-    "assets/kitchen/menu/Biryani.jpeg","assets/kitchen/menu/parathas.jpeg",
+    "assets/kitchen/menu/Biryani.jpeg",
+    "assets/kitchen/menu/parathas.jpeg",
   ];
 
-  var txt =['\nA\nP\nP\nE\nT\nI\nZ\nE\nR','\nB\nR\nE\nA\nK\nF\nA\nS\nT','\n\n\nP\nA\nS\nT\nA',
-    '\n\n\nP\nI\nZ\nZ\nA','\nS\nA\nN\nD\nW\nI\nC\nH\nE','\n\nB\nU\nR\nG\nE\nR','\nD\nE\nS\nS\nE\nR\nT\nS',
-    '\nB\nE\nV\nE\nR\nA\nG\nE\nS','\n\nN\nO\nN\n-\nV\nE\nG',
-    '\n\n\n\nV\nE\nG','\n\nA\nR\nA\nB\nI\nA\nN',
-    '\nP\nA\nR\nA\nT\nH\nA\nS'
+  var txt = [
+    '\nA\nP\nP\nE\nT\nI\nZ\nE\nR',
+    '\nB\nR\nE\nA\nK\nF\nA\nS\nT',
+    '\n\n\nP\nA\nS\nT\nA',
+    '\n\n\nP\nI\nZ\nZ\nA',
+    '\nS\nA\nN\nD\nW\nI\nC\nH\nE',
+    '\n\nB\nU\nR\nG\nE\nR',
+    '\nD\nE\nS\nS\nE\nR\nT\nS',
+    '\nB\nE\nV\nE\nR\nA\nG\nE\nS',
+    '\n\nN\nO\nN\n-\nV\nE\nG',
+    '\n\n\n\nV\nE\nG',
+    '\n\nA\nR\nA\nB\nI\nA\nN',
+    '\nP\nA\nR\nA\nT\nH\nA\nS',
   ];
 
-  var link =[Appetizers(),BreakFast(),AddPasta(),AddPizza(),AddSandwich(),AddBurgers(),Desserts(),Beverages(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),MyAppp(),];
+  var link = [
+    Appetizers(),
+    BreakFast(),
+    AddPasta(),
+    AddPizza(),
+    AddSandwich(),
+    AddBurgers(),
+    Desserts(),
+    Beverages(),
+    NonVeg(),
+    AddVeg(),
+    AddArabian(),
+    AddParathas()
+  ];
 
   Widget build(BuildContext context) {
     return SafeArea(
@@ -70,7 +97,9 @@ class _KitchenMenuState extends State<KitchenMenu> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 15,),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Text("Food",
                         style: GoogleFonts.alegreya(
                             textStyle: Theme.of(context).textTheme.headline4,
@@ -81,8 +110,10 @@ class _KitchenMenuState extends State<KitchenMenu> {
                             textStyle: Theme.of(context).textTheme.headline4,
                             fontSize: 30,
                             color: Colors.brown)),
-                    Text("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --",
-                      style: TextStyle(color: Colors.brown),),
+                    Text(
+                      "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --",
+                      style: TextStyle(color: Colors.brown),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -91,17 +122,17 @@ class _KitchenMenuState extends State<KitchenMenu> {
                       child: GridView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 6,
-                              mainAxisSpacing: 6,
-                              childAspectRatio: 0.65
-                          ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 6,
+                                  mainAxisSpacing: 6,
+                                  childAspectRatio: 0.65),
                           itemCount: img.length,
                           itemBuilder: (context, index) {
                             return Card(
-                              shape:
-                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
@@ -116,45 +147,47 @@ class _KitchenMenuState extends State<KitchenMenu> {
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
+                                                bottomRight:
+                                                    Radius.circular(15),
                                                 topLeft: Radius.circular(15),
                                               ),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  // offset: Offset(10, 10),
-                                                  // blurRadius: 20,
-                                                    color: Colors.transparent.withOpacity(1))
+                                                    // offset: Offset(10, 10),
+                                                    // blurRadius: 20,
+                                                    color: Colors.transparent
+                                                        .withOpacity(1))
                                               ],
                                               image: DecorationImage(
                                                   image: AssetImage(
                                                     img[index],
                                                   ),
                                                   fit: BoxFit.cover)),
-                                          child: GestureDetector(
-                                            onTap: (){
-                                              setState(() {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) => link[index],
-                                                  ),
-                                                );
-                                              });
-                                            }
-                                          ),
-                                        )
-                                    ),
+                                          child: GestureDetector(onTap: () {
+                                            setState(() {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      link[index],
+                                                ),
+                                              );
+                                            });
+                                          }),
+                                        )),
                                     Flexible(
                                         flex: 2,
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
                                                 txt[index],
                                                 textAlign: TextAlign.center,
                                                 style: GoogleFonts.alegreya(
-                                                    textStyle:
-                                                    Theme.of(context).textTheme.headline4,
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .headline4,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white),
@@ -162,7 +195,6 @@ class _KitchenMenuState extends State<KitchenMenu> {
                                             ),
                                           ],
                                         ))
-
                                   ],
                                 ),
                               ),
@@ -172,8 +204,7 @@ class _KitchenMenuState extends State<KitchenMenu> {
                   ],
                 ),
               ),
-            )
-        ),
+            )),
       ),
     );
   }

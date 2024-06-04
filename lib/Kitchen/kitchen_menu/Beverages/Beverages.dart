@@ -40,7 +40,7 @@ class _BeveragesState extends State<Beverages> {
     "assets/kitchen/menu/beverages/smoothie.jpeg","assets/kitchen/menu/beverages/tea.jpeg","assets/kitchen/menu/beverages/cocktails.jpeg","assets/kitchen/menu/beverages/Milkshakes.jpeg",];
 
   var text3 =["\n\n\nC\nO\nF\nF\nE\nE\n","\n\n\n\nJ\nU\nI\nC\nE\n","\n\nS\nM\nO\nO\nT\nH\nI\nE","\n\n\n\n\nT\nE\nA\n",
-    '\n\nC\nO\nC\nK\nT\nA\nI\nL','\n\nM\nI\nL\nK\nS\nH\nA\nK\nE\nS'];
+    '\n\nC\nO\nC\nK\nT\nA\nI\nL','\nM\nI\nL\nK\nS\nH\nA\nK\nE\nS'];
 
   var link =[AddCoffee(),AddJuice(),AddSmoothie(),AddTea(),AddCocktail(),AddMilkshakes()];
   Widget build(BuildContext context) {

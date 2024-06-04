@@ -27,12 +27,12 @@ class _DessertsState extends State<Desserts> {
 
   var desertType = ["assets/kitchen/menu/deserts/cakes.jpeg","assets/kitchen/menu/deserts/pie.jpeg",
     "assets/kitchen/menu/deserts/icecream.png","assets/kitchen/menu/deserts/cookie.png","assets/kitchen/menu/deserts/browni.jpeg",
-    "assets/kitchen/menu/deserts/cupcakes.jpeg", "assets/kitchen/menu/deserts/pudding.jpeg" ,"assets/kitchen/menu/deserts/chocolates.jpeg"];
+    "assets/kitchen/menu/deserts/cupcakes.jpeg", "assets/kitchen/menu/deserts/pudding.jpeg" ];
 
-  var text3 =["\n\n\n\nC\nA\nK\nE\nS","\n\n\n\n\nP\nI\nE","\nI\nC\nE\nC\nR\nE\nA\nM","\nC\nO\nO\nK\nI\nE\nS",
-    '\nB\nR\nO\nW\nN\nI\nE\nS','\nC\nU\nP\nC\nA\nK\nE\nS','\nP\n\nU\nD\nD\nI\nN\nG','\nC\nH\nO\nC\nO\nL\nO\nA\nT\nE\nS'];
+  var text3 =["\n\n\n\nC\nA\nK\nE\nS","\n\n\n\n\nP\nI\nE","\n\nI\nC\nE\nC\nR\nE\nA\nM","\n\nC\nO\nO\nK\nI\nE\nS",
+    '\n\nB\nR\nO\nW\nN\nI\nE\nS','\n\nC\nU\nP\nC\nA\nK\nE\nS','\n\nP\nU\nD\nD\nI\nN\nG',];
 
-  var link =[AddCake(),AddPie(),AddIcecream(),AddCookies(),AddBrownies(),AddCupcake(), AddPuddings(),AddChocolate()];
+  var link =[AddCake(),AddPie(),AddIcecream(),AddCookies(),AddBrownies(),AddCupcake(), AddPuddings(),];
   Widget build(BuildContext context) {
     return SafeArea(
       child: SafeArea(

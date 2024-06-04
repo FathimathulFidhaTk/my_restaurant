@@ -9,14 +9,6 @@ import 'package:my_restaurant/Customer/desert/cupcake/view_food.dart';
 import 'package:my_restaurant/Customer/desert/icecream/view_food.dart';
 import 'package:my_restaurant/Customer/desert/pie/view_food.dart';
 import 'package:my_restaurant/Customer/desert/puddings/view_food.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Cakes/add_cakes.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Ice%20cream/add_icecream.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Pie/add_pie.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/brownies/add_brownies.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/chocolates/add_chocolates.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cookies/add_cookies.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cupcakes/add_cupcakes.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/puddings/add_puddings.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -35,12 +27,12 @@ class _DessertsState extends State<Desserts> {
 
   var desertType = ["assets/kitchen/menu/deserts/cakes.jpeg","assets/kitchen/menu/deserts/pie.jpeg",
     "assets/kitchen/menu/deserts/icecream.png","assets/kitchen/menu/deserts/cookie.png","assets/kitchen/menu/deserts/browni.jpeg",
-    "assets/kitchen/menu/deserts/cupcakes.jpeg", "assets/kitchen/menu/deserts/pudding.jpeg" ,"assets/kitchen/menu/deserts/chocolates.jpeg"];
+    "assets/kitchen/menu/deserts/cupcakes.jpeg", "assets/kitchen/menu/deserts/pudding.jpeg" ];
 
   var text3 =["\n\n\n\nC\nA\nK\nE\nS","\n\n\n\n\nP\nI\nE","\n\nI\nC\nE\nC\nR\nE\nA\nM","\n\nC\nO\nO\nK\nI\nE\nS",
-    '\n\nB\nR\nO\nW\nN\nI\nE\nS','\n\nC\nU\nP\nC\nA\nK\nE\nS','\n\nP\nU\nD\nD\nI\nN\nG','\nC\nH\nO\nC\nO\nL\nO\nA\nT\nE\nS'];
+    '\n\nB\nR\nO\nW\nN\nI\nE\nS','\n\nC\nU\nP\nC\nA\nK\nE\nS','\n\nP\nU\nD\nD\nI\nN\nG'];
 
-  var link =[ViewCustCake(),ViewCustPie(),ViewCustIcecream(),ViewCustCookies(),ViewCustBrowni(),ViewCustCupcake(),ViewCustPudding(),ViewCustChocolate()];
+  var link =[ViewCustCake(),ViewCustPie(),ViewCustIcecream(),ViewCustCookies(),ViewCustBrowni(),ViewCustCupcake(),ViewCustPudding()];
 
   Widget build(BuildContext context) {
     return SafeArea(

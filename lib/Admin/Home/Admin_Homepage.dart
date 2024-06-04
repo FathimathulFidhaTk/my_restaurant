@@ -71,16 +71,16 @@ class AdminHome extends StatelessWidget {
                                         builder: (context) => AdminMenu()));
                               },
                             ),
-                            CategoryItemTile(
-                              CategoryName: "CUSTOMER FOOD ORDERS",
-                              ImagePath: "assets/admin/food_orders.jpeg",
-                              onPressed: () {},
-                            ),
-                            CategoryItemTile(
-                              CategoryName: "BILL GENERATING ",
-                              ImagePath: "assets/admin/bill.jpeg",
-                              onPressed: () {},
-                            ),
+                            // CategoryItemTile(
+                            //   CategoryName: "CUSTOMER FOOD ORDERS",
+                            //   ImagePath: "assets/admin/food_orders.jpeg",
+                            //   onPressed: () {},
+                            // ),
+                            // CategoryItemTile(
+                            //   CategoryName: "BILL GENERATING ",
+                            //   ImagePath: "assets/admin/bill.jpeg",
+                            //   onPressed: () {},
+                            // ),
                             CategoryItemTile(
                               CategoryName: "Logout",
                               ImagePath: "assets/admin/exist.jpeg",

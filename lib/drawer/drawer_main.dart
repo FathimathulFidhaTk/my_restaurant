@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_restaurant/Intro_Pages/screenpage.dart';
 import 'package:my_restaurant/Kitchen/kitchen_home.dart';
 import '../Admin/viewfoodmenu.dart';
-import '../Kitchen/Prepared_Orders.dart';
 import '../Kitchen/kitchen_menu/Kitchen_food_screen.dart';
 import '../Kitchen/kitchenfeedback.dart';
 import 'drawer_header.dart';
@@ -31,6 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -38,6 +38,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var currentPage = DrawerSections.dashboard;
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +52,18 @@ class _HomePageState extends State<HomePage> {
       container = AdminMenu();
     } else if (currentPage == DrawerSections.settings) {
       // container = SettingsPage();
-    } else if (currentPage == DrawerSections.notifications) {
-      container = PreparedOrders();
+    // } else if (currentPage == DrawerSections.notifications) {
+    //   container = PreparedOrders();
     } else if (currentPage == DrawerSections.privacy_policy) {
       container = ViewFeedback();
-    } else if (currentPage == DrawerSections.send_feedback) {
-      // container = ;
+    }else if (currentPage == DrawerSections.logout) {
+      InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          }
+      );
     }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:Size.fromHeight(65),
@@ -111,14 +117,14 @@ class _HomePageState extends State<HomePage> {
               currentPage == DrawerSections.events ? true : false),
           menuItem(4, "View Menu", Icons.menu_book_sharp,
               currentPage == DrawerSections.notes ? true : false),
-          menuItem(5, "View Orders", Icons.library_books_sharp,
-              currentPage == DrawerSections.settings ? true : false),
-          menuItem(6, "Prepared Orders", Icons.send,
-              currentPage == DrawerSections.notifications ? true : false),
+          // menuItem(5, "View Orders", Icons.library_books_sharp,
+          //     currentPage == DrawerSections.settings ? true : false),
+          // menuItem(6, "Prepared Orders", Icons.send,
+          //     currentPage == DrawerSections.notifications ? true : false),
           menuItem(7, "FeedBacks", Icons.feedback,
               currentPage == DrawerSections.privacy_policy ? true : false),
-          menuItem(8, "Logout", Icons.logout,
-              currentPage == DrawerSections.send_feedback ? true : false),
+          menuItem(8, "Log out", Icons.logout,
+              currentPage == DrawerSections.logout ? true : false),
         ],
       ),
     );
@@ -137,14 +143,14 @@ class _HomePageState extends State<HomePage> {
               currentPage = DrawerSections.events;
             } else if (id == 4) {
               currentPage = DrawerSections.notes;
-            } else if (id == 5) {
-              currentPage = DrawerSections.settings;
-            } else if (id == 6) {
-              currentPage = DrawerSections.notifications;
+            // } else if (id == 5) {
+            //   currentPage = DrawerSections.settings;
+            // } else if (id == 6) {
+            //   currentPage = DrawerSections.notifications;
             } else if (id == 7) {
               currentPage = DrawerSections.privacy_policy;
             } else if (id == 8) {
-              currentPage = DrawerSections.send_feedback;
+              currentPage = DrawerSections.logout;
             }
           });
         },
@@ -186,5 +192,5 @@ enum DrawerSections {
   settings,
   notifications,
   privacy_policy,
-  send_feedback,
+  logout,
 }

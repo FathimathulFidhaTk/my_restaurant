@@ -134,7 +134,7 @@ class FoodItemCard extends StatelessWidget {
                         style: GoogleFonts.alegreya(
                           textStyle: Theme.of(context).textTheme.headline4,
                           fontSize: 24, color: Colors.brown,),),
-                    ),SizedBox(width: 50,),
+                    ),SizedBox(width: 45,),
                     IconButton(onPressed: (){
                     }, icon: Icon(Icons.delete_forever,color: Colors.brown,size: 20,))
                   ],

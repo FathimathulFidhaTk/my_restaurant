@@ -50,6 +50,12 @@ dependencies:
   dots_indicator: ^3.0.0
   liquid_swipe: ^3.1.0
   file_picker: ^5.2.5
+  intl_phone_field: ^3.2.0
+  staggered_grid_view_flutter: ^0.0.4
+  date_time_picker: ^2.1.0
+
+
+
 
 
 

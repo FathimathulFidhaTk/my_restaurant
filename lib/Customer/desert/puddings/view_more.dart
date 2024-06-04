@@ -2,9 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Customer/appt/foodfingers/view_order.dart';
-import 'package:my_restaurant/Customer/burger/view_order.dart';
-import 'package:my_restaurant/Customer/desert/puddings/view_order.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,9 +12,9 @@ class PuddingPage extends StatefulWidget {
   final String foodDescription;
   final String foodDocumentId;
   final String imageUrl;
+  final String foodPrice;
 
-
-  PuddingPage(this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl);
+  PuddingPage(this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl,this.foodPrice);
 
   @override
   State<PuddingPage> createState() => _PuddingPageState();
@@ -56,9 +53,28 @@ class _PuddingPageState extends State<PuddingPage> {
       });
     }
   }
+  Future<void> _placeOrder() async {
+    final img = widget.imageUrl;
+    final name = widget.foodName;
+    final price = widget.foodPrice;
+    final qty = quantity;
+    final description = widget.foodDescription;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    await firestore.collection('food orders').add({
+      'imageUrl': img,
+      'orderDate': Timestamp.now(),
+      'food Name': name,
+      'food Price': price,
+      'Quantity': qty,
+      'food description': description,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidth = mediaQueryData.size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -71,8 +87,6 @@ class _PuddingPageState extends State<PuddingPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: Container(
-                      height: Get.height * 0.85,
-                      width: Get.width * 1,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.brown),
@@ -88,13 +102,13 @@ class _PuddingPageState extends State<PuddingPage> {
                         children: [
                           Container(
                             height: Get.height * 0.51,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                image: DecorationImage(image:
-                                NetworkImage(widget.imageUrl),
+                                image: DecorationImage(
+                                  image: NetworkImage(widget.imageUrl),
                                   fit: BoxFit.cover,
-                                )
-                            ),
+                                )),
                           ),
                           SizedBox(
                             height: 8,
@@ -125,8 +139,9 @@ class _PuddingPageState extends State<PuddingPage> {
                               children: <Widget>[
                                 Text('Quantity: $quantity',
                                     style: GoogleFonts.alegreya(
-                                        textStyle:
-                                        Theme.of(context).textTheme.headline4,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
                                         fontSize: 22,
                                         color: Colors.brown)),
                                 SizedBox(width: 20),
@@ -134,11 +149,12 @@ class _PuddingPageState extends State<PuddingPage> {
                                     onPressed: incrementQuantity,
                                     child: Icon(Icons.add),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.1, Get.height * 0.04),
+                                      minimumSize: Size(
+                                          Get.width * 0.1, Get.height * 0.04),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 10,
@@ -147,11 +163,12 @@ class _PuddingPageState extends State<PuddingPage> {
                                     onPressed: decrementQuantity,
                                     child: Icon(Icons.remove),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.1, Get.height * 0.04),
+                                      minimumSize: Size(
+                                          Get.width * 0.1, Get.height * 0.04),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
                                     )),
                               ],
                             ),
@@ -162,39 +179,45 @@ class _PuddingPageState extends State<PuddingPage> {
                               children: [
                                 ElevatedButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PuddingOrderPage(
-                                                  widget.foodName,
-                                                  widget.foodDescription,
-                                                  quantity,
-                                                  widget.imageUrl
-                                              ),
+                                      _placeOrder();
+                                      final snackBar = SnackBar(
+                                        backgroundColor: Colors.brown,
+                                        content: Text(
+                                          'Food ordered successfully!',
+                                          style: TextStyle(color: Colors.white),
                                         ),
+                                        duration: Duration(
+                                            seconds:
+                                            3), // Optional: Set the duration
                                       );
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
                                     },
                                     child: Text('Order now'),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.35, Get.height * 0.05),
+                                      minimumSize: Size(
+                                          Get.width * 0.35, Get.height * 0.05),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 35,
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
                                     child: Text('Cancel'),
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                      Size(Get.width * 0.35, Get.height * 0.05),
+                                      minimumSize: Size(
+                                          Get.width * 0.35, Get.height * 0.05),
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
                                     )),
                               ],
                             ),

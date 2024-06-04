@@ -2,18 +2,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Cakes/add_cakes.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Ice%20cream/add_icecream.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/Pie/add_pie.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/brownies/add_brownies.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/chocolates/add_chocolates.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cookies/add_cookies.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/cupcakes/add_cupcakes.dart';
-import 'package:my_restaurant/Kitchen/kitchen_menu/Desserts/puddings/add_puddings.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/beef/view_beef.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/chickhen/view_chickhen.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/fish/view_fish.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/lamb/view_lamb.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/pork/add_pork.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/Non%20-%20vegg/pork/view_pork.dart';
+import 'beef/add_beef.dart';
+import 'chickhen/add_chickhen.dart';
+import 'duck/add_duck.dart';
+import 'duck/view_duck.dart';
+import 'fish/add_fish.dart';
+import 'lamb/add_lamb.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize a new Firebase App instance
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -24,7 +27,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Remove the debug banner
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       home:  NonVeg(),
@@ -48,7 +50,7 @@ class _NonVegState extends State<NonVeg> {
   var text3 =["\n\nC\nH\nI\nC\nK\nH\nE\nN","\n\n\n\n\nB\nE\nE\nF","\n\n\n\n\nP\nO\nR\nK","\n\n\n\n\nL\nA\nM\nB",
     '\n\n\n\n\nD\nU\nC\nK','\n\n\n\n\nF\nI\nS\nH'];
 
-  var link =[AddCake(),AddPie(),AddIcecream(),AddCookies(),AddBrownies(),AddCupcake(), AddPuddings(),AddChocolate()];
+  var link =[ViewChickhen(),ViewBeef(),ViewPork(),ViewLamb(),ViewDuck(),ViewFish()];
   Widget build(BuildContext context) {
     return SafeArea(
       child: SafeArea(
@@ -61,7 +63,7 @@ class _NonVegState extends State<NonVeg> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 15,),
-                    Text("Beverages",
+                    Text("Non-Vegeterian",
                         style: GoogleFonts.alegreya(
                             textStyle: Theme.of(context).textTheme.headline4,
                             fontSize: 28.5,

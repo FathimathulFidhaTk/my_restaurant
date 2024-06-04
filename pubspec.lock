@@ -161,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  date_time_picker:
+    dependency: "direct main"
+    description:
+      name: date_time_picker
+      sha256: "6923c568bcb67a66ab7e083708d0adbcae8214b41bb84d49febc17e89e06fc4a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   dots_indicator:
     dependency: "direct main"
     description:
@@ -464,6 +472,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.11"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
+  intl_phone_field:
+    dependency: "direct main"
+    description:
+      name: intl_phone_field
+      sha256: "73819d3dfcb68d2c85663606f6842597c3ddf6688ac777f051b17814fe767bbf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   js:
     dependency: transitive
     description:
@@ -661,6 +685,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  staggered_grid_view_flutter:
+    dependency: "direct main"
+    description:
+      name: staggered_grid_view_flutter
+      sha256: d46b27d1b57344945edf9eadbd5ee03a667a6599fd87e79f9a2d5e717e6accf3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   stream_channel:
     dependency: transitive
     description:

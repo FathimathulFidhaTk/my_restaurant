@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Kitchen/kitchen_drawer.dart';
 import '../Kitchen/kitchen_menu/Burger/view_burgers.dart';
+import '../Kitchen/kitchen_menu/Non - vegg/non_veg.dart';
 import '../Kitchen/kitchen_menu/Pasta/view_pasta.dart';
 import '../Kitchen/kitchen_menu/Piza/view_pizza.dart';
 import '../Kitchen/kitchen_menu/Sandwich/view_sandwich.dart';
+import '../Kitchen/kitchen_menu/arabian/view_arabian.dart';
+import '../Kitchen/kitchen_menu/noodles/view_noodles.dart';
+import '../Kitchen/kitchen_menu/parathas/view_parathas.dart';
+import '../Kitchen/kitchen_menu/vegg/view_veg.dart';
 import 'AdminDessert/desserts.dart';
 import 'Admin_Apptizers/admin_appetizers.dart';
+import 'Admin_Beverages/admin_beverages.dart';
 import 'Admin_Breakfast/Adminbreakfast.dart';
 
 class AdminMenu extends StatefulWidget {
@@ -26,12 +31,10 @@ class _AdminMenuState extends State<AdminMenu> {
     "assets/kitchen/menu/deserts.jpeg",
     "assets/kitchen/menu/beverages.jpeg",
     "assets/kitchen/menu/chikhen.jpeg",
-    "assets/kitchen/menu/seafood.jpeg",
     "assets/kitchen/menu/veg.png",
-    "assets/kitchen/menu/noodles.jpeg",
-    "assets/kitchen/menu/japaneese.jpeg",
     "assets/kitchen/menu/Biryani.jpeg",
     "assets/kitchen/menu/parathas.jpeg",
+
   ];
 
   var txt = [
@@ -44,12 +47,10 @@ class _AdminMenuState extends State<AdminMenu> {
     '\nD\nE\nS\nS\nE\nR\nT\nS',
     '\nB\nE\nV\nE\nR\nA\nG\nE\nS',
     '\n\nN\nO\nN\n-\nV\nE\nG',
-    '\n\nS\nE\nA\nF\nO\nO\nD',
     '\n\n\n\nV\nE\nG',
-    '\n\nN\nO\nO\nD\nL\nE\nS',
-    '\nJ\nA\nP\nA\nN\nE\nS\nE',
     '\n\nA\nR\nA\nB\nI\nA\nN',
-    '\nP\nA\nR\nA\nT\nH\nA\nS'
+    '\nP\nA\nR\nA\nT\nH\nA\nS',
+
   ];
 
   var link = [
@@ -60,13 +61,11 @@ class _AdminMenuState extends State<AdminMenu> {
     ViewSandwich(),
     ViewBurgers(),
     AdminDesserts(),
-    MyAppp(),
-    MyAppp(),
-    MyAppp(),
-    MyAppp(),
-    MyAppp(),
-    MyAppp(),
-    MyAppp(),
+    AdminBeverages(),
+    NonVeg(),
+    ViewVegg(),
+    ViewArabian(),
+    ViewParathas(),
   ];
 
   Widget build(BuildContext context) {

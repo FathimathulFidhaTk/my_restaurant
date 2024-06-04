@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
+import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 
 void main() async {
@@ -37,32 +39,30 @@ class ViewPie extends StatelessWidget {
 class FoodList extends StatelessWidget {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-
-
   @override
+
   Widget build(BuildContext context) {
+
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collection('pie').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
-        final details = snapshot.data!.docs;
+        final foodItems = snapshot.data!.docs;
         return Padding(
           padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
           child: Container(
-            height: Get.height * 5,
-            child: GridView.builder(
-              itemCount: details.length,
+            child:StaggeredGridView.countBuilder(
+              itemCount: foodItems.length,
               itemBuilder: (context, index) {
-                final food = details[index].data();
-                return FoodItemCard(Fooditem: food as Map<String, dynamic>);
-              }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.47
-            ),
+                final foodItem = foodItems[index];
+                return FoodItemCard(foodItem: foodItem);
+              },
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 15,
+              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
             ),
           ),
         );
@@ -73,17 +73,18 @@ class FoodList extends StatelessWidget {
 }
 
 class FoodItemCard extends StatelessWidget {
-  final Map<String, dynamic>? Fooditem;
+  final QueryDocumentSnapshot foodItem;
 
-  FoodItemCard({required this.Fooditem});
+  FoodItemCard({required this.foodItem});
 
-
+  Future<void> _deleteItem() async {
+    await foodItem.reference.delete();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = Fooditem?['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
+    final imageUrl = foodItem?['imageUrl'] ?? 'URL_TO_FALLBACK_IMAGE';
     return Container(
-        height: Get.height * 5,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: Colors.white,
@@ -114,10 +115,10 @@ class FoodItemCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 6,left: 8),
                 child: Text(
-                  '${Fooditem?['food name'] ?? 'No Food Name'}',
+                  '${foodItem?['food name'] ?? 'No Food Name'}',
                   style: GoogleFonts.alegreya(
                     textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 21.5, color: Colors.brown,),
+                    fontSize: 23, color: Colors.brown,),
                 ),
               ),
               Padding(
@@ -130,13 +131,14 @@ class FoodItemCard extends StatelessWidget {
                         fontSize: 22, color: Colors.brown,),),
                     Padding(
                       padding: const EdgeInsets.only(left: 4,),
-                      child: Text('${Fooditem?['food price'] ?? 'No Food Price'}',
+                      child: Text('${foodItem?['food price'] ?? 'No Food Price'}',
                         style: GoogleFonts.alegreya(
                           textStyle: Theme.of(context).textTheme.headline4,
                           fontSize: 24, color: Colors.brown,),),
-                    ),SizedBox(width: 48,),
-                    IconButton(onPressed: (){
-                    }, icon: Icon(Icons.delete_forever,color: Colors.brown,size: 20,))
+                    ),SizedBox(width: 45,),
+                    IconButton(
+                        onPressed: _deleteItem,
+                        icon: Icon(Icons.delete_forever,color: Colors.brown,))
                   ],
                 ),
               ),

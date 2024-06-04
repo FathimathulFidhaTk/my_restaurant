@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
       home:  LoginPage(),
     );
   }
@@ -43,10 +42,10 @@ class _LoginPageState extends State<LoginPage> {
   bool showpass = true;
 
   void logincheck(String email, String password) async {
-    if (email == 'admin@gmail.com' && password == '123456') {
+    if (email == 'admin@gmail.com' && password == '1234567890') {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) =>  AdminHome()));
-    } else  if (email == 'kitchen@gmail.com' && password == '1234567') {
+    } else  if (email == 'kitchen@gmail.com' && password == '0987654321') {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) =>  HomePage()));
     }

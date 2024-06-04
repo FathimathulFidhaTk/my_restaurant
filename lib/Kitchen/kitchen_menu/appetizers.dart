@@ -42,7 +42,7 @@ class _AppetizersState extends State<Appetizers> {
     "assets/kitchen/menu/appetizers/soup.jpeg",
     "assets/kitchen/menu/appetizers/salads.jpeg",
     "assets/kitchen/menu/appetizers/stuffedfoods.jpeg",
-    "assets/kitchen/menu/appetizers/others.jpeg"
+    // "assets/kitchen/menu/appetizers/others.jpeg"
   ];
 
   var text = [
@@ -51,10 +51,10 @@ class _AppetizersState extends State<Appetizers> {
     "\n\n\n\nS\nO\nU\nP",
     "\n\n\n\nS\nA\nL\nA\nD\nS",
     '\nS\nT\nU\nF\nF\nE\nD\nF\nO\nO\nD',
-    '\n\n\n\nO\nT\nH\nE\nR\nS'
+    // '\n\n\n\nO\nT\nH\nE\nR\nS'
   ];
 
-  var appt =[AddFoodDip(),AddFoodFingers(),AddFoodSoups(),AddFoodSalads(),AddStuffedFood(),AddOtherFood()];
+  var appt =[AddFoodDip(),AddFoodFingers(),AddFoodSoups(),AddFoodSalads(),AddStuffedFood()];
 
   Widget build(BuildContext context) {
     return SafeArea(

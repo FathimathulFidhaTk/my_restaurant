@@ -43,8 +43,8 @@ class _BreakFastState extends State<BreakFast> {
     "assets/kitchen/menu/breakfast/Eggs.jpeg","assets/kitchen/menu/breakfast/pancake.jpeg","assets/kitchen/menu/breakfast/waffles.jpeg",
     "assets/kitchen/menu/breakfast/Crossiant.jpeg"];
 
-  var text2 =["\n\n\nC\nE\nR\nA\nL\nS","\n\n\n\nT\nO\nS\nT","\n\n\n\nE\nG\nG\nS","\nP\nA\nN\nC\nA\nK\nE\nS",
-    '\n\nW\nA\nF\nF\nL\nE\nS','\n\nC\nR\nO\nI\nS\nS\nA\nN\nT\nS'];
+  var text2 =["\n\n\nC\nE\nR\nA\nL\nS","\n\n\n\nT\nO\nS\nT","\n\n\n\nE\nG\nG\nS","\n\nP\nA\nN\nC\nA\nK\nE\nS",
+    '\n\nW\nA\nF\nF\nL\nE\nS','\nC\nR\nO\nI\nS\nS\nA\nN\nT\nS'];
 
   var link =[AddCerals(),AddToast(),AddEggs(),AddPancakes(), AddWaffles(),AddCroissants()];
   Widget build(BuildContext context) {

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+
+
 
 class FoodDetailsPage extends StatefulWidget {
   final String foodName;
@@ -71,7 +74,9 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidth = mediaQueryData.size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -84,8 +89,6 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: Container(
-                      height: Get.height * 0.86,
-                      width: Get.width * 0.96,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.brown),
@@ -101,6 +104,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         children: [
                           Container(
                             height: Get.height * 0.51,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(

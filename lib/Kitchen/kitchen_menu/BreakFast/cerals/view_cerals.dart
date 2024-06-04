@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
+import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 
 void main() async {
@@ -51,18 +53,16 @@ class FoodList extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
           child: Container(
-            height: Get.height * 5,
-            child: GridView.builder(
+            child:StaggeredGridView.countBuilder(
               itemCount: foodItems.length,
               itemBuilder: (context, index) {
                 final foodItem = foodItems[index];
                 return FoodItemCard(Fooditem: foodItem);
-              }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.49
-            ),
+              },
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 15,
+              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
             ),
           ),
         );
@@ -135,7 +135,7 @@ class FoodItemCard extends StatelessWidget {
                         style: GoogleFonts.alegreya(
                           textStyle: Theme.of(context).textTheme.headline4,
                           fontSize: 24, color: Colors.brown,),),
-                    ),SizedBox(width: 48,),
+                    ),SizedBox(width: 45,),
                     IconButton(
                         onPressed: _deleteItem,
                         icon: Icon(Icons.delete_forever,color: Colors.brown,))

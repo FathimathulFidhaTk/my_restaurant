@@ -9,7 +9,6 @@ import 'package:my_restaurant/Intro_Pages/screenpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize a new Firebase App instance
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

@@ -73,6 +73,8 @@ class _StuffedFoodPageState extends State<StuffedFoodPage> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidth = mediaQueryData.size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -85,8 +87,6 @@ class _StuffedFoodPageState extends State<StuffedFoodPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: Container(
-                      height: Get.height * 0.83,
-                      width: Get.width * 1,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.brown),
@@ -102,6 +102,7 @@ class _StuffedFoodPageState extends State<StuffedFoodPage> {
                         children: [
                           Container(
                             height: Get.height * 0.51,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(

@@ -1,17 +1,13 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_restaurant/Kitchen/kitchen_menu/BreakFast/Croissants/view_croissants.dart';
 import 'package:my_restaurant/Kitchen/kitchen_menu/BreakFast/cerals/view_cerals.dart';
-import 'package:path/path.dart' as path;
-
-
 
 class AddCerals extends StatefulWidget {
   AddCerals({super.key});
@@ -21,81 +17,15 @@ class AddCerals extends StatefulWidget {
 }
 
 class _AddCeralsState extends State<AddCerals> {
-  final CollectionReference menu = FirebaseFirestore.instance.collection('food fingers');
-  TextEditingController fdname = TextEditingController();
-  TextEditingController fdprice = TextEditingController();
-  TextEditingController fddescription = TextEditingController();
-  TextEditingController img = TextEditingController();
+  final TextEditingController _foodIdController = TextEditingController();
+  final TextEditingController _foodNameController = TextEditingController();
+  final TextEditingController _foodPriceController = TextEditingController();
+  final TextEditingController _foodDescriptionController = TextEditingController();
 
-  void addFood(){
-    final data = {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  final ImagePicker _picker = ImagePicker();
 
-      'name':fdname.text,
-      'price':fdprice.text,
-      'description':fddescription.text,
-      'image':img.text,
-    };
-
-    menu.add(data);
-  }
-
-
-  FirebaseStorage storage = FirebaseStorage.instance;
-
-  Future<void> _upload(String inputSource) async {
-    final picker = ImagePicker();
-    XFile? pickedImage;
-    try {
-      pickedImage = await picker.pickImage(
-          source: inputSource == 'camera'
-              ? ImageSource.camera
-              : ImageSource.gallery,
-          maxWidth: 1920);
-
-      final String fileName = path.basename(pickedImage!.path);
-      File imageFile = File(pickedImage.path);
-
-      try {
-        await storage.ref(fileName).putFile(
-            imageFile,
-            SettableMetadata(customMetadata: {
-              'uploaded_by': 'A bad guy',
-              'description': 'Some description...'
-            }));
-
-        setState(() {});
-      } on FirebaseException catch (error) {
-        if (kDebugMode) {
-          print(error);
-        }
-      }
-    } catch (err) {
-      if (kDebugMode) {
-        print(err);
-      }
-    }
-  }
-
-  Future<List<Map<String, dynamic>>> _loadImages() async {
-    List<Map<String, dynamic>> files = [];
-
-    final ListResult result = await storage.ref().list();
-    final List<Reference> allFiles = result.items;
-
-    await Future.forEach<Reference>(allFiles, (file) async {
-      final String fileUrl = await file.getDownloadURL();
-      final FullMetadata fileMeta = await file.getMetadata();
-      files.add({
-        "url": fileUrl,
-        "path": file.fullPath,
-        "uploaded_by": fileMeta.customMetadata?['uploaded_by'] ?? 'Nobody',
-        "description":
-        fileMeta.customMetadata?['description'] ?? 'No description'
-      });
-    });
-
-    return files;
-  }
 
   var formkey = GlobalKey<FormState>();
 
@@ -145,76 +75,41 @@ class _AddCeralsState extends State<AddCerals> {
                               child:
                               SingleChildScrollView(
                                   child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Expanded(
-                                          flex: 0,
-                                          child: FutureBuilder(
-                                              future: _loadImages(),
-                                              builder: (context,  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                                                return Stack(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 30),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            image: DecorationImage(
-                                                                image: NetworkImage("https://i.pinimg.com/564x/0a/d6/60/0ad66014d4cb55abee8653a2adb6f65d.jpg"),
-                                                                fit: BoxFit.cover
-                                                            ),
-                                                            border: Border.all(color: Colors.brown)
-                                                        ),
-                                                        height: Get.height * 0.5,
-                                                        width: Get.width * 0.8,
-                                                        child: ListView.builder(
-                                                          physics: NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: snapshot.data?.length,
-                                                          itemBuilder: (context, index) {
-                                                            final Map<String, dynamic> image = snapshot.data![index];
-                                                            return Container(
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius: BorderRadius.circular(12),
-                                                                  image: DecorationImage(
-                                                                      image: NetworkImage(image['url'])
-                                                                  )
-                                                              ),
-
-                                                              height: Get.height * 0.5,
-                                                              width: Get.width * 0.8,
-                                                            );
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Positioned(child: Card(
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(100),
-                                                      ),
-                                                      color: Colors.brown,
-                                                      child: IconButton(
-                                                        onPressed: (){
-                                                          showModalBottomSheet(context: context, builder: ((builder) => bottomSheet(context)));
-                                                        },icon: Center(child: Icon(Icons.add_a_photo,size: 28,color: Colors.white,)),
-                                                      ),
-                                                    ),
-                                                      bottom: 5,
-                                                      right: 10,
-                                                    )
-                                                  ],
-                                                );
-                                              }
-                                          ),
-                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 20,right: 20,top: 30),
+                                          padding: const EdgeInsets.only(left: 20,right: 20,top: 120),
                                           child: Container(
                                             decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(12),
                                                 border: Border.all(color: Colors.brown)
                                             ),
                                             child: TextField(
-                                              controller: fdname,
+                                              controller: _foodIdController,
+                                              keyboardType: TextInputType.multiline,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  borderSide: BorderSide(color: Colors.brown),
+                                                ),
+                                                hintText: "Enter Food Id",
+                                                hintStyle: GoogleFonts.alegreya(
+                                                  textStyle: Theme.of(context).textTheme.headline4,
+                                                  fontSize: 20,
+                                                  color: Colors.brown,),
+                                              ),
+                                              textInputAction: TextInputAction.next,
+                                            ),
+                                          ),
+                                        ) , Padding(
+                                          padding: const EdgeInsets.only(left: 20,right: 20,top: 15),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(12),
+                                                border: Border.all(color: Colors.brown)
+                                            ),
+                                            child: TextField(
+                                              controller: _foodNameController,
                                               keyboardType: TextInputType.multiline,
                                               decoration: InputDecoration(
                                                 border: OutlineInputBorder(
@@ -239,7 +134,7 @@ class _AddCeralsState extends State<AddCerals> {
                                                 border: Border.all(color: Colors.brown)
                                             ),
                                             child: TextField(
-                                              controller: fdprice,
+                                              controller: _foodPriceController,
                                               decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(12),
@@ -264,7 +159,7 @@ class _AddCeralsState extends State<AddCerals> {
                                             ),
                                             child: Center(
                                               child: TextField(
-                                                controller: fddescription,
+                                                controller: _foodDescriptionController,
                                                 keyboardType: TextInputType.multiline,
                                                 maxLines: 4,
                                                 decoration: InputDecoration(
@@ -284,12 +179,9 @@ class _AddCeralsState extends State<AddCerals> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 50,right: 40,top: 25,),
+                                          padding: const EdgeInsets.only(left: 50,right: 40,top: 25),
                                           child: ElevatedButton(
-                                              onPressed: () {
-                                                addFood();
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => AddCerals()));
-                                              },
+                                              onPressed: _uploadImage,
                                               child: Text(
                                                 "Add Food Details",
                                                 style: GoogleFonts.alegreya(
@@ -306,7 +198,7 @@ class _AddCeralsState extends State<AddCerals> {
                                               )),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 50,right: 40,bottom: 20,top: 10),
+                                          padding: const EdgeInsets.only(left: 50,right: 40,bottom: 20,top: 8),
                                           child: ElevatedButton(
                                               onPressed: () {
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => ViewCerals()));
@@ -324,7 +216,7 @@ class _AddCeralsState extends State<AddCerals> {
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(8)),
                                               )),
-                                        )
+                                        ),
                                       ]
                                   )
                               )
@@ -335,48 +227,37 @@ class _AddCeralsState extends State<AddCerals> {
             )));
   }
 
-  Widget bottomSheet(BuildContext context) {
-    return Container(
-      height: 100.0,
-      width: 300,
-      margin: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20
-      ),
-      child: Column(
-        children: [
-          Text("Choose Profile Photo",
-            style: GoogleFonts.alegreya(
-              textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 26,
-              color: Colors.brown,),),
-          SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton.icon(
-                icon: Icon(Icons.camera, color: Colors.brown, size: 26,),
-                onPressed: () => _upload('camera'),
-                label: Text("Camera",
-                  style: GoogleFonts.alegreya(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    fontSize: 22,
-                    color: Colors.brown,),
-                ),), SizedBox(width: 35,),
-              TextButton.icon(
-                icon: Icon(Icons.image, color: Colors.brown, size: 26,),
-                onPressed: () => _upload('gallery'),
-                label: Text("Gallery",
-                    style: GoogleFonts.alegreya(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 22,
-                        color: Colors.brown)),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
+  Future<void> _uploadImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      String fileName = file.path.split('/').last;
+      Reference ref = storage.ref().child('Crealsfood_images/$fileName');
+      UploadTask task = ref.putFile(file);
+
+      task.whenComplete(() async {
+        final imageUrl = await ref.getDownloadURL();
+
+        final fooditemm = {
+          'food id': _foodIdController.text,
+          'food name': _foodNameController.text,
+          'food price': _foodPriceController.text,
+          'food description': _foodDescriptionController.text,
+          'imageUrl': imageUrl,
+
+        };
+
+        await firestore.collection('creals').add(fooditemm);
+
+        _foodIdController.clear();
+        _foodNameController.clear();
+        _foodPriceController.clear();
+        _foodDescriptionController.clear();
+
+      });
+    }
+  }
+
+
+}

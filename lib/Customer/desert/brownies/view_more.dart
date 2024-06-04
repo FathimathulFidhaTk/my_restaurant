@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Customer/desert/brownies/view_order.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +10,11 @@ class BrowniPage extends StatefulWidget {
   final String foodDescription;
   final String foodDocumentId;
   final String imageUrl;
+  final String foodPrice;
+
 
   BrowniPage(
-      this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl);
+      this.foodName, this.foodDescription, this.foodDocumentId, this.imageUrl,this.foodPrice);
 
   @override
   State<BrowniPage> createState() => _BrowniPageState();
@@ -27,7 +28,6 @@ class _BrowniPageState extends State<BrowniPage> {
   void incrementQuantity() {
     setState(() {
       quantity++;
-      // Update the Firestore document with the new quantity
       FirebaseFirestore.instance
           .collection('brownies')
           .doc(widget.foodDocumentId)
@@ -41,7 +41,6 @@ class _BrowniPageState extends State<BrowniPage> {
     if (quantity > 1) {
       setState(() {
         quantity--;
-        // Update the Firestore document with the new quantity
         FirebaseFirestore.instance
             .collection('brownies')
             .doc(widget.foodDocumentId)
@@ -51,9 +50,28 @@ class _BrowniPageState extends State<BrowniPage> {
       });
     }
   }
+  Future<void> _placeOrder() async {
+    final img = widget.imageUrl;
+    final name = widget.foodName;
+    final price = widget.foodPrice;
+    final qty = quantity;
+    final description = widget.foodDescription;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    await firestore.collection('food orders').add({
+      'imageUrl': img,
+      'orderDate': Timestamp.now(),
+      'food Name': name,
+      'food Price': price,
+      'Quantity': qty,
+      'food description': description,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidth = mediaQueryData.size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -66,8 +84,6 @@ class _BrowniPageState extends State<BrowniPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: Container(
-                      height: Get.height * 0.85,
-                      width: Get.width * 1,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.brown),
@@ -83,6 +99,7 @@ class _BrowniPageState extends State<BrowniPage> {
                         children: [
                           Container(
                             height: Get.height * 0.51,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(
@@ -100,7 +117,7 @@ class _BrowniPageState extends State<BrowniPage> {
                             child: Text(widget.foodName,
                                 style: GoogleFonts.alegreya(
                                     textStyle:
-                                        Theme.of(context).textTheme.headline4,
+                                    Theme.of(context).textTheme.headline4,
                                     fontSize: 26,
                                     color: Colors.brown)),
                           ),
@@ -109,7 +126,7 @@ class _BrowniPageState extends State<BrowniPage> {
                             child: Text(widget.foodDescription,
                                 style: GoogleFonts.alegreya(
                                     textStyle:
-                                        Theme.of(context).textTheme.headline4,
+                                    Theme.of(context).textTheme.headline4,
                                     fontSize: 18,
                                     color: Colors.brown)),
                           ),
@@ -134,7 +151,7 @@ class _BrowniPageState extends State<BrowniPage> {
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)),
+                                          BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 10,
@@ -148,7 +165,7 @@ class _BrowniPageState extends State<BrowniPage> {
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)),
+                                          BorderRadius.circular(8)),
                                     )),
                               ],
                             ),
@@ -159,16 +176,20 @@ class _BrowniPageState extends State<BrowniPage> {
                               children: [
                                 ElevatedButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => BrowniOrderPage(
-                                              widget.foodName,
-                                              widget.foodDescription,
-                                              quantity,
-                                              widget.imageUrl),
+                                      _placeOrder();
+                                      final snackBar = SnackBar(
+                                        backgroundColor: Colors.brown,
+                                        content: Text(
+                                          'Food ordered successfully!',
+                                          style: TextStyle(color: Colors.white),
                                         ),
+                                        duration: Duration(
+                                            seconds:
+                                            3), // Optional: Set the duration
                                       );
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
                                     },
                                     child: Text('Order now'),
                                     style: ElevatedButton.styleFrom(
@@ -177,13 +198,15 @@ class _BrowniPageState extends State<BrowniPage> {
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)),
+                                          BorderRadius.circular(8)),
                                     )),
                                 SizedBox(
                                   width: 35,
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
                                     child: Text('Cancel'),
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size(
@@ -191,7 +214,7 @@ class _BrowniPageState extends State<BrowniPage> {
                                       primary: Colors.brown,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)),
+                                          BorderRadius.circular(8)),
                                     )),
                               ],
                             ),

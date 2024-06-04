@@ -2,10 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restaurant/Customer/Pasta/view_order.dart';
-import 'package:my_restaurant/Customer/appt/foodfingers/view_order.dart';
 import 'package:path/path.dart' as path;
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -81,6 +78,8 @@ class _PastaPageState extends State<PastaPage> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidth = mediaQueryData.size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -93,8 +92,6 @@ class _PastaPageState extends State<PastaPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: Container(
-                      height: Get.height * 0.85,
-                      width: Get.width * 1,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.brown),
@@ -110,6 +107,7 @@ class _PastaPageState extends State<PastaPage> {
                         children: [
                           Container(
                             height: Get.height * 0.51,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(image:

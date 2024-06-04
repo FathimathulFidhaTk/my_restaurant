@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_restaurant/Customer/appt/foodfingers/view_food.dart';
 import 'package:my_restaurant/Customer/appt/salads/view_food.dart';
 import 'dip/cust_view_food_details.dart';
-import 'other/view_food.dart';
 import 'soup/view_food.dart';
 import 'stuffedfoods/view_food.dart';
 
@@ -21,7 +20,6 @@ class _CustAppetizersState extends State<CustAppetizers> {
     "assets/kitchen/menu/appetizers/soup.jpeg",
     "assets/kitchen/menu/appetizers/salads.jpeg",
     "assets/kitchen/menu/appetizers/stuffedfoods.jpeg",
-    "assets/kitchen/menu/appetizers/others.jpeg"
   ];
 
   var text = [
@@ -30,7 +28,6 @@ class _CustAppetizersState extends State<CustAppetizers> {
     "\n\n\n\nS\nO\nU\nP",
     "\n\n\n\nS\nA\nL\nA\nD\nS",
     '\nS\nT\nU\nF\nF\nE\nD\nF\nO\nO\nD',
-    '\n\n\n\nO\nT\nH\nE\nR\nS'
   ];
 
   var appt = [
@@ -39,7 +36,7 @@ class _CustAppetizersState extends State<CustAppetizers> {
     ViewSoup(),
     ViewFoodSalads(),
     ViewStuffedFood(),
-    ViewOtherFood()
+    // ViewOtherFood()
   ];
 
   Widget build(BuildContext context) {

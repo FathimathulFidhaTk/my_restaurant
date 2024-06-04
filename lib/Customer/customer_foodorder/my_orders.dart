@@ -1,9 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home:  OrderListPage(),
+    );
+  }
+}
 class OrderListPage extends StatelessWidget {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -11,7 +30,26 @@ class OrderListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: OrderList(),
+        body: Container(
+          child: Padding(
+        padding: const EdgeInsets.only(top: 8,left: 10),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+    Text("My Food Orders",
+    style: GoogleFonts.alegreya(
+    textStyle: Theme.of(context).textTheme.headline4,
+    fontSize: 30,
+    color: Colors.brown)),
+    Text(
+    "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --",
+    style: TextStyle(color: Colors.brown),
+    ),
+    ],
+    ),),
+        ),
+
+
       ),
     );
   }
@@ -29,7 +67,6 @@ class OrderList extends StatelessWidget {
           return CircularProgressIndicator();
         }
         final orders = snapshot.data!.docs;
-
         return ListView.builder(
           itemCount: orders.length,
           itemBuilder: (context, index) {

@@ -52,7 +52,6 @@ class _BottomNavigationBarExampleState
     Home(),
     OrderList(),
     FeedbackMessage(),
-    
   ];
 
   void _onItemTapped(int index) {
@@ -108,7 +107,6 @@ class _BottomNavigationBarExampleState
                   ),
                 ),
                 label: 'Logout'),
-
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
